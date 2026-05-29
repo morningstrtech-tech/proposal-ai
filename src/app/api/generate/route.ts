@@ -200,7 +200,7 @@ export async function POST(request: Request) {
                               
           if (shouldRetry && attempt < maxRetries - 1) {
             attempt++;
-            console.log(`Gemini API sibuk (Error 503/429). Mencoba ulang secara otomatis... (Attempt ${attempt + 1}/${maxRetries})`);
+            console.warn(`[Retry] Gemini API attempt ${attempt + 1}/${maxRetries}`);
             // Exponential backoff: 1.5 detik, 3 detik
             await new Promise(resolve => setTimeout(resolve, attempt * 1500));
             continue;

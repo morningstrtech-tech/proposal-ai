@@ -53,6 +53,4 @@ export const env = {
   GEMINI_API_KEY: optionalEnv("GEMINI_API_KEY"),
   GOOGLE_CLIENT_ID: optionalEnv("GOOGLE_CLIENT_ID"),
   GOOGLE_CLIENT_SECRET: optionalEnv("GOOGLE_CLIENT_SECRET"),
-  EMAIL_SERVER: optionalEnv("EMAIL_SERVER"),
-  EMAIL_FROM: optionalEnv("EMAIL_FROM", "noreply@proposal.ai"),
 };
