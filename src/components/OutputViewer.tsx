@@ -71,6 +71,7 @@ export default function OutputViewer({
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true },
         jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+        // @ts-ignore - Definisi tipe (typings) html2pdf.js belum diupdate untuk properti pagebreak
         pagebreak: { mode: ['css', 'legacy'], before: 'h2', avoid: ['h3', 'h4', 'p', 'li', 'img', 'table'] }
       }).from(el).save();
       toast.success("PDF berhasil diunduh", { id: toastId });
