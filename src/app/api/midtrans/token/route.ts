@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { transactions } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 import { PLAN_DETAILS, type Plan } from "@/lib/subscription";
 // @ts-ignore
 import midtransClient from "midtrans-client";
@@ -72,7 +73,7 @@ export async function POST(req: Request) {
     // Save the token to db (optional but good for tracking)
     await db.update(transactions)
       .set({ snapToken: transaction.token, snapRedirectUrl: transaction.redirect_url })
-      .where({ orderId });
+      .where(eq(transactions.orderId, orderId));
 
     return NextResponse.json({ token: transaction.token, redirect_url: transaction.redirect_url });
   } catch (error: any) {
