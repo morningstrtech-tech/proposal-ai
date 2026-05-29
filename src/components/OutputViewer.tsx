@@ -91,7 +91,7 @@ export default function OutputViewer({
         wordContent = parts.join('<br clear="all" style="page-break-before:always" />\n<h2').replace('<br clear="all" style="page-break-before:always" />\n<h2', '<h2');
       }
 
-      const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:sans-serif;line-height:1.6}h1,h2,h3{color:#202124}h2{margin-top:24pt;margin-bottom:12pt;font-size:18pt}h3{margin-top:16pt;margin-bottom:8pt;font-size:14pt}p{margin-bottom:12pt;font-size:11pt}img{max-width:100%}</style></head><body>${wordContent}</body></html>`;
+      const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style>body{font-family:Calibri,sans-serif;line-height:1.8;color:#333;font-size:11pt}h1{display:none}h2{margin-top:24pt;margin-bottom:12pt;font-size:16pt;font-weight:bold;color:#1a73e8;border-bottom:2pt solid #1a73e8;padding-bottom:6pt}h3{margin-top:16pt;margin-bottom:8pt;font-size:13pt;font-weight:bold;color:#202124}p{margin-bottom:10pt;text-align:justify}ul,ol{margin-left:18pt;margin-bottom:10pt}li{margin-bottom:4pt}table{width:100%;border-collapse:collapse;margin:12pt 0}th{background-color:#1a73e8;color:white;font-weight:bold;padding:8pt 10pt;border:1pt solid #1a73e8;text-align:left}td{padding:6pt 10pt;border:1pt solid #dadce0}tr:nth-child(even){background-color:#f8f9fa}strong{color:#202124}img{max-width:100%}</style></head><body>${wordContent}</body></html>`;
       const blob = await asBlob(html);
       saveAs(blob as Blob, `${title || "proposal"}.docx`);
       toast.success("Word document berhasil diunduh", { id: toastId });

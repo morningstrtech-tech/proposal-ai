@@ -132,27 +132,67 @@ export async function POST(request: Request) {
         ? "3-5 halaman, detail standar"
         : "10+ halaman, sangat detail dan mendalam";
 
-    const prompt = `Kamu adalah seorang penulis proposal profesional berpengalaman. Buatkan sebuah proposal ${formData.type} yang lengkap dan profesional dengan detail berikut:
+    const prompt = `Kamu adalah penulis proposal profesional berpengalaman di Indonesia. Buatkan proposal ${formData.type} yang lengkap, rapi, dan profesional.
 
-**Judul Proposal:** ${formData.judul}
-**Organisasi/Perusahaan:** ${formData.org || "Tidak disebutkan"}
-**Ditujukan Kepada:** ${formData.kepada || "Tidak disebutkan"}
-**Deskripsi/Tujuan:** ${formData.desc}
-**Tone/Gaya Penulisan:** ${formData.tone}
-**Panjang Dokumen:** ${lengthGuide}
-**Bahasa:** ${formData.lang}
-**Data Tambahan (Budget/Timeline/dll):** ${formData.extra || "Tidak ada data tambahan"}
+INFORMASI PROPOSAL:
+- Judul: ${formData.judul}
+- Organisasi: ${formData.org || "Tidak disebutkan"}
+- Ditujukan Kepada: ${formData.kepada || "Tidak disebutkan"}
+- Deskripsi/Tujuan: ${formData.desc}
+- Tone: ${formData.tone}
+- Panjang: ${lengthGuide}
+- Bahasa: ${formData.lang}
+- Data Tambahan: ${formData.extra || "Tidak ada"}
+- Tanggal: ${new Date().toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" })}
 
-**Instruksi Format (SANGAT PENTING):**
-- Output HARUS dalam format HTML murni.
-- PENTING: Gunakan HANYA tag <h2> untuk SEMUA judul bagian utama (Executive Summary, Latar Belakang, Tujuan, dll). Hal ini krusial untuk fitur page-break otomatis di PDF/Word.
-- DILARANG menggunakan tag <h1>. Gunakan <h2> untuk bagian utama, dan <h3> untuk sub-bagian.
-- Gunakan tag <p> untuk paragraf, <ul>/<li> untuk daftar.
-- Sertakan section utama berikut menggunakan <h2>: 1. Executive Summary, 2. Latar Belakang, 3. Tujuan, 4. Metodologi/Strategi, 5. Timeline/Jadwal, 6. Anggaran (jika relevan), 7. Penutup
-- Buat konten yang substantif, panjang, mendetail, dan bukan sekadar placeholder.
-- Jangan sertakan tag <html>, <head>, atau <body> — hanya konten proposal saja.
-- Pastikan hasilnya terlihat profesional dan siap cetak.
-- Tanggal proposal: ${new Date().toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" })}`;
+ATURAN FORMAT HTML (WAJIB DIIKUTI TANPA PENGECUALIAN):
+
+1. STRUKTUR HEADING:
+   - DILARANG KERAS menggunakan <h1>. Tidak boleh ada <h1> sama sekali.
+   - Gunakan <h2> HANYA untuk judul bagian utama (contoh: <h2>1. Pendahuluan</h2>)
+   - Gunakan <h3> untuk sub-bagian di dalam bagian utama
+   - Setiap <h2> HARUS diawali dengan nomor urut (1. 2. 3. dst)
+
+2. STRUKTUR PARAGRAF:
+   - Setiap paragraf HARUS dibungkus dalam tag <p>...</p>
+   - DILARANG menulis teks tanpa tag pembungkus
+   - Setiap paragraf harus berisi minimal 3-4 kalimat yang substantif
+   - Gunakan <strong> untuk penekanan penting di dalam paragraf
+
+3. STRUKTUR DAFTAR:
+   - Gunakan <ul><li>...</li></ul> untuk daftar tidak berurutan
+   - Gunakan <ol><li>...</li></ol> untuk daftar berurutan
+   - Setiap <li> harus berisi penjelasan lengkap, bukan hanya 1-2 kata
+
+4. STRUKTUR TABEL (jika ada anggaran/timeline):
+   - Gunakan <table><thead><tr><th>...</th></tr></thead><tbody><tr><td>...</td></tr></tbody></table>
+   - Tabel HARUS memiliki header (<thead>) dan body (<tbody>)
+
+5. BAGIAN WAJIB (gunakan <h2> dengan nomor untuk setiap bagian):
+   <h2>1. Executive Summary</h2> — ringkasan singkat keseluruhan proposal
+   <h2>2. Latar Belakang</h2> — konteks dan alasan mengapa proposal ini dibuat
+   <h2>3. Tujuan</h2> — tujuan utama dan spesifik
+   <h2>4. Ruang Lingkup</h2> — batasan dan cakupan pekerjaan
+   <h2>5. Metodologi</h2> — pendekatan dan strategi yang digunakan
+   <h2>6. Timeline / Jadwal</h2> — tahapan pelaksanaan (gunakan tabel)
+   <h2>7. Anggaran</h2> — rincian biaya (gunakan tabel, jika relevan)
+   <h2>8. Tim Pelaksana</h2> — siapa yang bertanggung jawab
+   <h2>9. Penutup</h2> — kesimpulan dan harapan
+
+6. DILARANG:
+   - Jangan gunakan tag <html>, <head>, <body>, atau <style>
+   - Jangan gunakan Markdown (**, ##, -, dll). HANYA HTML.
+   - Jangan gunakan <br> untuk membuat jarak. Gunakan <p> baru.
+   - Jangan gunakan <div>. Gunakan tag semantik (<p>, <ul>, <table>, <h2>, <h3>).
+   - Jangan gunakan inline style pada elemen apapun.
+
+7. KUALITAS KONTEN:
+   - Tulis konten yang NYATA, substantif, dan profesional
+   - Setiap bagian harus berisi minimal 2-3 paragraf penuh
+   - Gunakan data dan angka yang realistis
+   - Bahasa harus formal dan profesional sesuai standar proposal resmi
+
+Mulai langsung dengan <h2>1. Executive Summary</h2> tanpa pembuka lain.`;
 
     // 7. Call Gemini API with proper error handling
     let generatedContent: string = "";

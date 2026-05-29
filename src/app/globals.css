@@ -218,12 +218,20 @@ body {
 }
 
 /* Prose Material for Generated Content */
-.prose-material h1 { font-family: var(--font-main); font-size: 2.25rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; }
-.prose-material h2 { font-family: var(--font-main); font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); }
-.prose-material p { margin-bottom: 1.25rem; font-weight: 400; color: var(--text-muted); line-height: 1.7; }
+.prose-material { font-family: var(--font-main); color: var(--text-main); line-height: 1.8; }
+.prose-material h1 { display: none; } /* h1 dilarang di proposal, sembunyikan jika muncul */
+.prose-material h2 { font-size: 1.4rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--text-main); padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); letter-spacing: -0.01em; }
+.prose-material h2:first-child { margin-top: 0; }
+.prose-material h3 { font-size: 1.1rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--text-main); }
+.prose-material p { margin-bottom: 1rem; font-weight: 400; color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; }
 .prose-material strong { font-weight: 600; color: var(--text-main); }
-.prose-material ul { margin-left: 1.5rem; margin-bottom: 1.25rem; color: var(--text-muted); }
-.prose-material li { margin-bottom: 0.5rem; }
+.prose-material ul, .prose-material ol { padding-left: 1.5rem; margin-bottom: 1.25rem; color: var(--text-muted); }
+.prose-material li { margin-bottom: 0.5rem; line-height: 1.7; font-size: 0.95rem; }
+.prose-material table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+.prose-material thead th { background: var(--primary); color: white; font-weight: 600; text-align: left; padding: 0.75rem 1rem; border: 1px solid var(--primary); }
+.prose-material tbody td { padding: 0.6rem 1rem; border: 1px solid var(--border-color); color: var(--text-muted); }
+.prose-material tbody tr:nth-child(even) { background: var(--hover-bg); }
+.prose-material tbody tr:hover { background: var(--active-bg); }
 
 /* Print */
 @media print {
@@ -576,51 +584,6 @@ div[role="status"] {
 .card-material:hover {
   box-shadow: var(--shadow-md);
   border-color: var(--primary);
-}
-
-/* ==================== PROSE (LEGAL PAGES) ==================== */
-.prose-material {
-  font-family: var(--font-main);
-  color: var(--text-main);
-  line-height: 1.8;
-}
-
-.prose-material h2 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin: 2.5rem 0 1rem;
-  color: var(--text-main);
-  letter-spacing: -0.01em;
-}
-
-.prose-material h3 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin: 1.5rem 0 0.75rem;
-  color: var(--text-main);
-}
-
-.prose-material p {
-  margin-bottom: 1rem;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-.prose-material ul {
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.prose-material li {
-  margin-bottom: 0.5rem;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
-
-.prose-material strong {
-  color: var(--text-main);
-  font-weight: 600;
 }
 
 /* ==================== RESPONSIVE HELPERS ==================== */
