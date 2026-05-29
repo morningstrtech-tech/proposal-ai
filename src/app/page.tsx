@@ -102,9 +102,12 @@ export default function LandingPage() {
           background: "var(--bg-main)",
         }}
       >
-        <div className="ai-box-material ai-box-animate" style={{ width: 56, height: 56, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <Sparkles size={28} color="white" strokeWidth={3} />
-        </div>
+        <img
+          src="/logopm.webp"
+          alt="Loading..."
+          className="ai-box-animate"
+          style={{ width: 64, height: 64, objectFit: "contain" }}
+        />
       </div>
     );
   }
